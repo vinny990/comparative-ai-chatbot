@@ -10,6 +10,9 @@ models.
 - Responsive UI built with Flask and Bootstrap.
 - Secure API key management with python-dotenv.
 
+## Screenshots
+![Web Interface](screenshots/interface.png)
+
 ## Setup
 1. Clone the repository: `git clone 
 https://github.com/your-username/comparative-ai-chatbot`
