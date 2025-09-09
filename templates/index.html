@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot Comparison</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Compare AI Responses</h1>
+    <form method="POST">
+        <input type="text" name="prompt" placeholder="Enter your prompt" 
+style="width: 300px;">
+        <button type="submit">Submit</button>
+    </form>
+    {% if prompt %}
+    <h2>Prompt: {{ prompt }}</h2>
+    <h3>OpenAI Response</h3><p>{{ openai }}</p>
+    <h3>Claude Response</h3><p>{{ claude }}</p>
+    <h3>Gemini Response</h3><p>{{ gemini }}</p>
+    {% endif %}
+</body>
+</html>
