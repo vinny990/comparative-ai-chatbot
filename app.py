@@ -12,13 +12,14 @@ def index():
         openai_response, openai_time = call_openai(prompt)
         claude_response, claude_time = call_claude(prompt)
         gemini_response, gemini_time = call_gemini(prompt)
-        save_response(prompt, openai_response, claude_response, 
-gemini_response)
+        save_response(prompt, openai_response, claude_response, gemini_response)
         return render_template("index.html",
                              prompt=prompt,
                              openai=openai_response,
                              claude=claude_response,
                              gemini=gemini_response,
-                             times=[openai_time, claude_time, 
-gemini_time])
+                             times=[openai_time, claude_time, gemini_time])
     return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)

@@ -11,6 +11,12 @@
 style="width: 300px;">
         <button type="submit">Submit</button>
     </form>
+	{% if analysis %}
+	<h2>Response Analysis</h2>
+	<p>Average Response Lengths: OpenAI: {{ analysis.avg_lengths.openai | round(2) }}, Claude: {{ analysis.avg_lengths.claude | round(2) }}, Gemini: {{ analysis.avg_lengths.gemini | round(2) }}</p>
+	<p>Average Sentiment Scores: OpenAI: {{ analysis.avg_sentiments.openai | round(2) }}, Claude: {{ analysis.avg_sentiments.claude | round(2) }}, Gemini: {{ analysis.avg_sentiments.gemini | round(2) }}</p>
+	<p>Correlation (Prompt Length vs. Sentiment): {{ analysis.correlation.prompt_length | tojson }}</p>
+	{% endif %}
     {% if prompt %}
     <h2>Prompt: {{ prompt }}</h2>
     <h3>OpenAI Response</h3><p>{{ openai }}</p>
