@@ -1,6 +1,6 @@
 # Comparative AI Chatbot Dashboard
 
-A web application that compares responses from OpenAI, Claude, and Gemini APIs for user-provided prompts. Built with Flask, this project demonstrates proficiency in AI API integration, web development, and secure configuration management. [View on GitHub](https://github.com/vinny990/comparative-ai-chatbot) | [Live Demo](#) (coming soon via Heroku).
+A web application that compares responses from OpenAI, Claude, and Gemini APIs for user-provided prompts. Built with Flask, this project demonstrates proficiency in AI API integration, web development, and secure configuration management. [View on GitHub](https://github.com/vinny990/comparative-ai-chatbot) | [Live Demo](https://vinny990-ai-chatbot-885893737143.us-central1.run.app/) (Hosted on Google Cloud Run).
 
 ## Features
 - Submit a text prompt and view side-by-side responses from three AI models.
