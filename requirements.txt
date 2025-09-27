@@ -1,0 +1,18 @@
+# Web framework & server
+flask==2.2.5
+gunicorn==20.1.0
+
+# HTTP requests
+requests==2.31.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Data & analysis
+pandas==2.0.3
+numpy==1.25.2
+textblob==0.17.1
+
+# For compatibility with pandas/numpy
+packaging==23.2
+

@@ -2,26 +2,76 @@
 <html>
 <head>
     <title>AI Chatbot Comparison</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body { margin: 20px; font-family: Arial, sans-serif; }
+        .card { height: 100%; }
+    </style>
 </head>
 <body>
-    <h1>Compare AI Responses</h1>
-    <form method="POST">
-        <input type="text" name="prompt" placeholder="Enter your prompt" 
-style="width: 300px;">
-        <button type="submit">Submit</button>
+<div class="container">
+    <h1 class="mb-4">Compare AI Chatbot Responses</h1>
+    <form method="POST" class="mb-4 d-flex">
+        <input type="text" name="prompt" class="form-control me-2" placeholder="Enter Prompt..." required>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-	{% if analysis %}
-	<h2>Response Analysis</h2>
-	<p>Average Response Lengths: OpenAI: {{ analysis.avg_lengths.openai | round(2) }}, Claude: {{ analysis.avg_lengths.claude | round(2) }}, Gemini: {{ analysis.avg_lengths.gemini | round(2) }}</p>
-	<p>Average Sentiment Scores: OpenAI: {{ analysis.avg_sentiments.openai | round(2) }}, Claude: {{ analysis.avg_sentiments.claude | round(2) }}, Gemini: {{ analysis.avg_sentiments.gemini | round(2) }}</p>
-	<p>Correlation (Prompt Length vs. Sentiment): {{ analysis.correlation.prompt_length | tojson }}</p>
-	{% endif %}
+
     {% if prompt %}
-    <h2>Prompt: {{ prompt }}</h2>
-    <h3>OpenAI Response</h3><p>{{ openai }}</p>
-    <h3>Claude Response</h3><p>{{ claude }}</p>
-    <h3>Gemini Response</h3><p>{{ gemini }}</p>
+    <h4>Prompt: <em>{{ prompt }}</em></h4>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="card border-primary mb-3">
+                <div class="card-header bg-primary text-white">OpenAI</div>
+                <div class="card-body">
+                    <p class="card-text">{{ openai }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-success mb-3">
+                <div class="card-header bg-success text-white">Claude</div>
+                <div class="card-body">
+                    <p class="card-text">{{ claude }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-warning mb-3">
+                <div class="card-header bg-warning text-dark">Gemini</div>
+                <div class="card-body">
+                    <p class="card-text">{{ gemini }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p><strong>Response Times:</strong>
+        🟦 OpenAI: {{ times[0] | round(2) }}s |
+        🟩 Claude: {{ times[1] | round(2) }}s |
+        🟨 Gemini: {{ times[2] | round(2) }}s
+    </p>
+
+    {% if analysis %}
+    <h3 class="mt-4">Response Analysis</h3>
+    <p><strong>Average Response Lengths:</strong>
+        OpenAI: {{ analysis.avg_lengths.openai | round(2) }},
+        Claude: {{ analysis.avg_lengths.claude | round(2) }},
+        Gemini: {{ analysis.avg_lengths.gemini | round(2) }}
+    </p>
+    <p><strong>Average Sentiment Scores:</strong>
+        OpenAI: {{ analysis.avg_sentiments.openai | round(2) }},
+        Claude: {{ analysis.avg_sentiments.claude | round(2) }},
+        Gemini: {{ analysis.avg_sentiments.gemini | round(2) }}
+    </p>
+    <p><strong>Correlation (Prompt Length vs. Sentiment):</strong>
+        OpenAI: {{ analysis.correlation.prompt_length.openai_sentiment | round(2) }},
+        Claude: {{ analysis.correlation.prompt_length.claude_sentiment | round(2) }},
+        Gemini: {{ analysis.correlation.prompt_length.gemini_sentiment | round(2) }}
+    </p>
+    <a href="/analysis" class="btn btn-outline-secondary">View Analysis Chart</a>
     {% endif %}
+    {% endif %}
+</div>
 </body>
 </html>
