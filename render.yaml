@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: comparative-ai-chatbot
+    runtime: docker
+    plan: free
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

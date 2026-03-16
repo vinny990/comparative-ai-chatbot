@@ -15,7 +15,7 @@ def call_openai(prompt):
             "Content-Type": "application/json"
         }
         data = {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4o-mini",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 150
         }
@@ -24,7 +24,7 @@ def call_openai(prompt):
         elapsed = time.time() - start
         return response.json()['choices'][0]['message']['content'], elapsed
     except requests.RequestException as e:
-        return f"Error querying OpenAI: {str(e)}", 0
+        return f"Error querying OpenAI: {e.response.status_code if e.response is not None else 'connection error'}", 0
 
 
 def call_claude(prompt):
@@ -37,7 +37,7 @@ def call_claude(prompt):
             "anthropic-version": "2023-06-01"
         }
         data = {
-            "model": "claude-3-7-sonnet-20250219",
+            "model": "claude-haiku-4-5-20251001",
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 150
         }
@@ -46,13 +46,13 @@ def call_claude(prompt):
         elapsed = time.time() - start
         return response.json()['content'][0]['text'], elapsed
     except requests.RequestException as e:
-        return f"Error querying Claude: {str(e)}", 0
+        return f"Error querying Claude: {e.response.status_code if e.response is not None else 'connection error'}", 0
 
 
 def call_gemini(prompt):
     try:
         start = time.time()
-        url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent"
+        url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
         headers = {"Content-Type": "application/json"}
         data = {"contents": [{"parts": [{"text": prompt}]}]}
         response = requests.post(
@@ -64,4 +64,4 @@ def call_gemini(prompt):
         elapsed = time.time() - start
         return response.json()['candidates'][0]['content']['parts'][0]['text'], elapsed
     except requests.RequestException as e:
-        return f"Error querying Gemini: {str(e)}", 0
+        return f"Error querying Gemini: {e.response.status_code if e.response is not None else 'connection error'}", 0
